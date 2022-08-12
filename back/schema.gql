@@ -1,0 +1,117 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  id: ID!
+  name: String!
+  picture: String
+}
+
+input ChangeEmailInput {
+  email: String!
+}
+
+input ChangePasswordInput {
+  confirm: String!
+  current: String!
+  newPass: String!
+}
+
+input CreateCategoryInput {
+  name: String!
+  picture: String = null
+}
+
+input CreateSkillInput {
+  name: String!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum Gender {
+  FEMALE
+  MALE
+}
+
+type LogOutOutput {
+  result: Boolean!
+}
+
+type LoginOutput {
+  """JWT token"""
+  token: String!
+}
+
+type Mutation {
+  changeEmail(changeEmailInput: ChangeEmailInput!): User!
+  changePassword(changePasswordInput: ChangePasswordInput!): User!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  createSkill(createSkillInput: CreateSkillInput!): Skill!
+  logIn(email: String!, password: String!): LoginOutput!
+  logOut: LogOutOutput!
+  registerUser(createUserInput: CreateUserInput!): User!
+  removeUser(id: Int!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type Query {
+  categories: [Category!]!
+  category(id: Int!): Category!
+  me: User!
+  skill(id: Int!): Skill!
+  skills: [Skill!]!
+  user(id: Int!): User!
+  users: [User!]!
+}
+
+type Skill {
+  id: ID!
+  name: String!
+}
+
+input UpdateUserInput {
+  about: String
+  birthday: DateTime
+  email: String
+  enabled: Boolean
+  facebookUrl: String
+  firstName: String
+  gender: Gender
+  id: ID!
+  lastName: String
+  linkedinUrl: String
+  password: String
+  phone: String
+  picture: String
+  step: Int
+  websiteUrl: String
+  workEmail: String
+}
+
+type User {
+  about: String
+  birthday: DateTime
+  email: String!
+  enabled: Boolean
+  facebookUrl: String
+  firstName: String
+  gender: Gender
+  id: ID!
+  lastName: String
+  linkedinUrl: String
+  password: String!
+  phone: String
+  picture: String
+  step: Int
+  websiteUrl: String
+  workEmail: String
+}
