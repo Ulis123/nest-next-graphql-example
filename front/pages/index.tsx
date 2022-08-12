@@ -13,8 +13,6 @@ import { GET_CATEGORIES, GET_SKILLS, ME } from "graphql/gql/queries";
 import { AppRoutes } from "types";
 
 const Home: NextPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(props);
-
   const client = useApolloClient();
   const skillsData = client.readQuery<ISkillsQuery>({ query: GET_SKILLS });
 
