@@ -1,0 +1,42 @@
+watch: true
+overwrite: true
+schema: http://localhost:5000/graphql
+
+generates:
+  schema.graphql:
+    config:
+      includeDirectives: true
+      includeIntrospectionTypes: true
+      commentDescriptions: true
+    plugins:
+      - schema-ast
+
+  graphql/__generated__/queries.ts:
+    documents: 'graphql/gql/queries.ts'
+    config:
+      reactApolloVersion: 3
+      withHooks: true
+      typesPrefix: I
+      dedupeOperationSuffix: true
+      useTypeImports: true
+    plugins:
+      - add:
+          content: '// THIS IS A GENERATED FILE, use `yarn codegen` to regenerate'
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+
+  graphql/__generated__/mutations.ts:
+    documents: 'graphql/gql/mutations.ts'
+    config:
+      reactApolloVersion: 3
+      withHooks: true
+      typesPrefix: I
+      dedupeOperationSuffix: true
+      useTypeImports: true
+    plugins:
+      - add:
+          content: '// THIS IS A GENERATED FILE, use `yarn codegen` to regenerate'
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
