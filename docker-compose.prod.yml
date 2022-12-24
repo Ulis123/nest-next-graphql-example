@@ -1,17 +1,24 @@
 version: '3.9'
 
 services:
+
+#  redis:
+#    container_name: redis
+#    image: redis:latest
+#    networks:
+#      - my_network
+
   postgres:
     image: postgres:latest
     restart: always
     ports:
       - "5432:5432"
-    volumes:
-      - ./back/db:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_DATABASE}
+    networks:
+      - my_network
 
   back:
     container_name: back
@@ -20,8 +27,6 @@ services:
       dockerfile: Dockerfile.prod
     env_file:
       - ./back/.env.production
-    volumes:
-      - ./back:/app
     restart: always
     ports:
       - "5000:5000"

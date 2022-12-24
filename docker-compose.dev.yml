@@ -1,6 +1,13 @@
 version: '3.9'
 
 services:
+
+#  redis:
+#    container_name: redis
+#    image: redis:latest
+#    networks:
+#      - my_network
+
   postgres:
     image: postgres:latest
     restart: always
@@ -12,6 +19,8 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_DATABASE}
+    networks:
+      - my_network
 
   back:
     container_name: back
@@ -22,6 +31,7 @@ services:
       - ./back/.env.development.development
     volumes:
       - ./back:/app
+      - /app/node_modules
     restart: always
     ports:
       - "5000:5000"
@@ -39,6 +49,7 @@ services:
       - ./front/.env.development
     volumes:
       - ./front:/app
+      - /app/node_modules
     restart: always
     ports:
       - "3000:3000"
