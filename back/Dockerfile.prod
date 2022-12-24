@@ -1,0 +1,30 @@
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install glob rimraf
+
+RUN npm install --only=development
+
+COPY . .
+
+RUN npm run build
+
+FROM node:18-alpine AS production
+
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+
+RUN yarn --production=true --pure-lockfile --ignore-optional
+
+COPY . .
+
+COPY --from=builder /app/dist ./dist
+
+CMD ["node", "dist/main"]

@@ -1,0 +1,16 @@
+.env.production
+.env.development
+.eslintrc.json
+.prettierignore
+.prettierrc
+.git
+.gitignore
+.dockerignore
+*.md
+*.log
+
+.husky
+.next
+node_modules
+Dockerfile.dev
+Dockerfile.prod

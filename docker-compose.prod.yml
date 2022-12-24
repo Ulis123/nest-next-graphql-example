@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./back/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+
+  back:
+    container_name: back
+    build:
+      context: ./back
+      dockerfile: Dockerfile.prod
+    env_file:
+      - ./back/.env.production
+    volumes:
+      - ./back:/app
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    networks:
+      - my_network
+
+  front:
+    container_name: front
+    build:
+      context: ./front
+      dockerfile: Dockerfile.prod
+    env_file:
+      - ./front/.env.production
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - back
+    networks:
+      - my_network
+
+
+networks:
+  my_network:
+    external: true
