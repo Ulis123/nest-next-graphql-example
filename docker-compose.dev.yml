@@ -14,7 +14,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./back/db:/var/lib/postgresql/data
+      - ./db:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: "user"
       POSTGRES_PASSWORD: "user"

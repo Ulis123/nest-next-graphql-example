@@ -60,7 +60,7 @@ const LogInLayout = () => {
 
       <Formik
         enableReinitialize
-        initialValues={{ email: "user@gmail.com", password: "12345678" } as ILogInMutationVariables}
+        initialValues={{ email: "", password: "" } as ILogInMutationVariables}
         validationSchema={logInSchema}
         onSubmit={handleSubmit}
       >
