@@ -114,8 +114,18 @@ const PureSliderCategoriesHome = () => {
       <SlickSlider ref={slickRef} {...settings}>
         {data.categories.map(el => {
           return (
-            <Link key={el.id} href={{ pathname: "/search-results", query: { categories: el.name } }}>
-              <Paper sx={[slide, { backgroundImage: el.picture ? `url(${el.picture})` : "none" }]}>
+            <Link key={el.id} href={{ /*pathname: "/search-results",*/ query: { categories: el.name } }}>
+              <Paper
+                sx={[
+                  slide,
+                  {
+                    backgroundImage: el.picture ? `url(${el.picture})` : "none",
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                  },
+                ]}
+              >
                 <Box sx={{ position: "absolute", bottom: "30px", left: "30px" }}>
                   <Typography color="common.white" sx={{ fontSize: 20 }} gutterBottom>
                     {el.name}
