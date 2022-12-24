@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps, emotionCache = clientSideEmotionCache }: 
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        {/*// @ts-ignore*/}
         <title>{pageProps.title ?? "Home"}</title>
       </Head>
 

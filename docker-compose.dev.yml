@@ -9,16 +9,16 @@ services:
 #      - my_network
 
   postgres:
-    image: postgres:latest
+    image: postgres:15
     restart: always
     ports:
       - "5432:5432"
     volumes:
       - ./back/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "user"
+      POSTGRES_DB: "test-db"
     networks:
       - my_network
 
@@ -28,7 +28,7 @@ services:
       context: ./back
       dockerfile: Dockerfile.dev
     env_file:
-      - ./back/.env.development.development
+      - ./back/.env
     volumes:
       - ./back:/app
       - /app/node_modules
@@ -61,4 +61,3 @@ services:
 
 networks:
   my_network:
-    external: true

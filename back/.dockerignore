@@ -1,5 +1,5 @@
 .env.production
-.env.development
+.env
 .eslintrc.js
 .prettierignore
 .prettierrc

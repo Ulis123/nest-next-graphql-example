@@ -9,14 +9,14 @@ services:
 #      - my_network
 
   postgres:
-    image: postgres:latest
+    image: postgres:15
     restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "user"
+      POSTGRES_DB: "test-db"
     networks:
       - my_network
 
@@ -53,4 +53,3 @@ services:
 
 networks:
   my_network:
-    external: true
