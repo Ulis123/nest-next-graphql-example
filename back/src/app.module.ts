@@ -3,16 +3,15 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverAsyncConfig } from "@nestjs/apollo";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { ThrottlerModule } from "@nestjs/throttler";
+import * as session from "express-session";
+import * as passport from "passport";
 
 import configuration from "src/config/configuration";
 import { UsersModule } from "src/users/users.module";
 import { AuthModule } from "src/auth/auth.module";
 import { SkillsModule } from "./skills/skills.module";
 import { CategoriesModule } from "./categories/categories.module";
-import * as session from "express-session";
-import * as passport from "passport";
 
 @Module({
   imports: [
@@ -28,12 +27,12 @@ import * as passport from "passport";
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => configService.get<TypeOrmModuleOptions>("database"),
+      useFactory: async (configService: ConfigService) => await configService.get("database"),
     }),
     GraphQLModule.forRootAsync<ApolloDriverAsyncConfig>({
       driver: ApolloDriver,
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => configService.get("graphQL"),
+      useFactory: async (configService: ConfigService) => await configService.get("graphQL"),
     }),
     UsersModule,
     AuthModule,

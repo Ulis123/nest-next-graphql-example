@@ -4,9 +4,9 @@ services:
 
 #  redis:
 #    container_name: redis
-#    image: redis:latest
-#    networks:
-#      - my_network
+#    image: redis:7
+#    ports:
+#      - "6379:6379"
 
   postgres:
     image: postgres:15
@@ -17,8 +17,6 @@ services:
       POSTGRES_USER: "user"
       POSTGRES_PASSWORD: "user"
       POSTGRES_DB: "test-db"
-    networks:
-      - my_network
 
   back:
     container_name: back
@@ -32,8 +30,6 @@ services:
       - "5000:5000"
     depends_on:
       - postgres
-    networks:
-      - my_network
 
   front:
     container_name: front
@@ -47,9 +43,3 @@ services:
       - "3000:3000"
     depends_on:
       - back
-    networks:
-      - my_network
-
-
-networks:
-  my_network:
